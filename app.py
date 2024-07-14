@@ -45,8 +45,8 @@ def generate_response_llms(prompt):
 
 # Function to convert text to speech
 def text_to_speech(text):
-    engine.say(text)
-    engine.runAndWait()
+    eng.say(text)
+    eng.runAndWait()
 
 # Function to convert speech to text
 def speech_to_text():
