@@ -7,7 +7,7 @@ import streamlit.components.v1 as components
 import os
 
 # Initialize pyttsx3 engine
-# engine = pyttsx3.init()
+eng = pyttsx3.init('sapi5')
 
 # Function to read the most recent row from CSV
 def read_most_recent_row(csv_filename):
