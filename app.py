@@ -3,7 +3,8 @@ import speech_recognition as sr
 import requests
 import csv
 from gtts import gTTS
-import playsound
+from pydub import AudioSegment
+from pydub.playback import play
 import streamlit.components.v1 as components
 import os
 
@@ -45,7 +46,8 @@ def generate_response_llms(prompt):
 def text_to_speech(text):
     tts = gTTS(text=text, lang='en')
     tts.save("output.mp3")
-    playsound.playsound("output.mp3")
+    sound = AudioSegment.from_mp3("output.mp3")
+    play(sound)
 
 # Function to convert speech to text
 def speech_to_text():
