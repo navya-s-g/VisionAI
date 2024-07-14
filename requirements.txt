@@ -2,6 +2,6 @@ streamlit
 speechrecognition
 requests
 gtts
-playsound
+pydub
 
 
