@@ -2,9 +2,11 @@ import streamlit as st
 import speech_recognition as sr
 import requests
 import csv
-import pyttsx3
+from gtts import gTTS
 import streamlit.components.v1 as components
 import os
+import tempfile
+import playsound
 
 # Function to read the most recent row from CSV
 def read_most_recent_row(csv_filename):
@@ -27,9 +29,9 @@ def generate_response_llms(prompt):
         ]
     }
     headers = {
-	"x-rapidapi-key": "6ce8754ec7msh19a016b83cda399p1823c8jsnefa4fb321746",
-	"x-rapidapi-host": "chat-gpt26.p.rapidapi.com",
-	"Content-Type": "application/json"
+        "x-rapidapi-key": "6ce8754ec7msh19a016b83cda399p1823c8jsnefa4fb321746",
+        "x-rapidapi-host": "chat-gpt26.p.rapidapi.com",
+        "Content-Type": "application/json"
     }
 
     response = requests.post(url, json=payload, headers=headers)
@@ -42,10 +44,10 @@ def generate_response_llms(prompt):
 
 # Function to convert text to speech
 def text_to_speech(text):
-    engine = pyttsx3.init()
-    engine.setProperty('rate', 150)
-    engine.say(text)
-    engine.runAndWait()
+    tts = gTTS(text)
+    with tempfile.NamedTemporaryFile(delete=True) as fp:
+        tts.save(fp.name)
+        playsound.playsound(fp.name)
 
 # Function to convert speech to text
 def speech_to_text():
@@ -60,7 +62,6 @@ def speech_to_text():
         return ""
     except sr.RequestError:
         return ""
-
 
 st.title("VisionAI")
 
