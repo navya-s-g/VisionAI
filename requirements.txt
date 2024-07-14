@@ -1,6 +1,6 @@
 streamlit
 speechrecognition
 requests
-gtts
-playsound
+pyttsx3
+
 
