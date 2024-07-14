@@ -2,12 +2,10 @@ import streamlit as st
 import speech_recognition as sr
 import requests
 import csv
-import pyttsx3
+from gtts import gTTS
+import playsound
 import streamlit.components.v1 as components
 import os
-
-# Initialize pyttsx3 engine
-eng = pyttsx3.init('espeak')
 
 # Function to read the most recent row from CSV
 def read_most_recent_row(csv_filename):
@@ -45,8 +43,9 @@ def generate_response_llms(prompt):
 
 # Function to convert text to speech
 def text_to_speech(text):
-    eng.say(text)
-    eng.runAndWait()
+    tts = gTTS(text=text, lang='en')
+    tts.save("output.mp3")
+    playsound.playsound("output.mp3")
 
 # Function to convert speech to text
 def speech_to_text():
